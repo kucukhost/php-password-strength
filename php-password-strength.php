@@ -42,6 +42,8 @@ function passwordStrength($password)
 
     $score += ($variationCount - 1) * 10;
 
-    return round($score / 10 + 1);
+    $strenght = round($score / 10 + 1);
+
+    return  $strenght > 10 ? 10 :  $strenght;
 }
 
