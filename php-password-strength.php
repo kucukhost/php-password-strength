@@ -1,5 +1,4 @@
 <?php
-
 function passwordStrength($password)
 {
     $score = 0;
@@ -17,16 +16,13 @@ function passwordStrength($password)
     $password_length = strlen($password);
 
 
-    if ($password_length < 5)
-        {
+    if ($password_length < 5) {
         $score += 5;
     }
-    else if ($password_length > 4 && $password_length < 8)
-        {
+    else if ($password_length > 4 && $password_length < 8) {
         $score += 10;
     }
-    else if ($score > 7)
-        {
+    else if ($score > 7) {
         $score += 25;
     }
 
