@@ -9,7 +9,6 @@ function passwordStrength($password)
 
     $letters = str_split($password);
 
-    $counter = 0;
     $chars = array();
     $counter = 0;
     for ($char = 0; $char < count($letters); $char++) {
@@ -44,7 +43,7 @@ function passwordStrength($password)
 
     $score += ($variationCount - 1) * 8;
 
-    $strenght = round($score / 10 + 1);
-    return $strenght > 10 ? 10 : $strenght;
+    $strength = round($score / 10 + 1);
+    return $strength > 10 ? 10 : $strength;
 }
 
