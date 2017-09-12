@@ -7,26 +7,28 @@ function passwordStrength($password)
         return 1;
     }
 
-    $chars = str_split($password);
-    for ($i = 0; $i < count($chars); $i++) {
-        $score += 5.0 / ($i + 1);
+    $letters = str_split($password);
+
+    $counter = 0;
+    $chars = array();
+    $counter = 0;
+    for ($char = 0; $char < count($letters); $char++) {
+        if (in_array($letters[$char], $chars)) {
+            ++$counter;
+            $score += 4.0 / ($counter + 1);
+            continue;
+        }
+        else {
+            $score += 4.0;
+            $chars[] = $letters[$char];
+        }
     }
 
     /*** get the length of the password ***/
     $password_length = strlen($password);
-
-
-    if ($password_length < 5) {
-        $score += 5;
-    }
-    else if ($password_length > 4 && $password_length < 8) {
-        $score += 10;
-    }
-    else if ($score > 7) {
-        $score += 25;
-    }
-
- // bonus points for mixing it up
+    $score = $password_length * 4;
+    
+        // bonus points for mixing it up
     $variations = array(
         'digits' => '/d/',
         'lower' => '/[a-z]/',
@@ -40,10 +42,9 @@ function passwordStrength($password)
         $variationCount += preg_match($regex, $password) ? 1 : 0;
     }
 
-    $score += ($variationCount - 1) * 10;
+    $score += ($variationCount - 1) * 8;
 
     $strenght = round($score / 10 + 1);
-
-    return  $strenght > 10 ? 10 :  $strenght;
+    return $strenght > 10 ? 10 : $strenght;
 }
 
